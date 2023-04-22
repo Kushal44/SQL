@@ -89,3 +89,8 @@ create index VoteTypeId_PostId
 on dbo.Votes(VoteTypeId, PostId)
 include (CreationDate)
 with (maxdop = 0, online = off, drop_existing = off)
+
+/*Index to find max(CreationDate) for Posts, to narrow down the search space*/
+create index CreationDate
+on dbo.Posts(CreationDate)
+with  (maxdop = 0, online = off, drop_existing = off)
