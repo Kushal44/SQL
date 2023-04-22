@@ -75,9 +75,17 @@ on dbo.Votes(PostId, VoteTypeId)
 include (CreationDate)
 with (maxdop = 0, online = off, drop_existing = on) 
 
---drop index VoteTypeId_PostId
+--drop index PostId_VoteTypeId
 --on dbo.Votes
 /*
 With OwnerUserId_CommunityOwnedDate_CreationDate, PostId_VoteTypeId Posts Reads - 74,106
 With OwnerUserId_CommunityOwnedDate_CreationDate, PostId_VoteTypeId Votes Reads - 219,177
 */
+
+/*
+there is no major difference in page IO when using index PostId_VoteTypeId vs VoteTypeId_PostId
+*/
+create index VoteTypeId_PostId
+on dbo.Votes(VoteTypeId, PostId)
+include (CreationDate)
+with (maxdop = 0, online = off, drop_existing = off)
