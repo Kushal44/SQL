@@ -1,7 +1,8 @@
 /*
 https://data.stackexchange.com/stackoverflow/query/7521/how-unsung-am-i
 */
-
+USE StackOverflow2013
+GO
 SET STATISTICS IO ON;
 
 select
